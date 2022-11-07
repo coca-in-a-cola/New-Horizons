@@ -52,7 +52,7 @@ namespace MinimalShooting
             // Rotate 360 degree per one seconds.
             // If turnSpeed is less than 1, it will be slower.
             // If turnSpeed is greater than 1, it will be faster.
-            transform.Rotate(this.axis, 360.0f * this.turnSpeed * Time.deltaTime);
+            //transform.Rotate(this.axis, 360.0f * this.turnSpeed * Time.deltaTime);
         }
     }
 }
