@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MinimalShooting
-{
+
     /// <summary>
     /// Bullet
     /// This class implements a bullet.
@@ -25,8 +24,10 @@ namespace MinimalShooting
         // The missile target.
         Transform followTarget = null;
 
+    
 
-        public void SetDirection(Vector3 direction)
+
+    public void SetDirection(Vector3 direction)
         {
             this.direction = direction;
         }
@@ -151,28 +152,30 @@ namespace MinimalShooting
         }
 
 
-        void CheckArea()
+    void CheckArea()
+    {
+        Vector3 point = Camera.main.WorldToViewportPoint(transform.position);
+        if (point.y < 0f || point.y > 1f || point.x > 1f || point.x < 0f)
         {
-            // It is destroy when position is over.
-            if (transform.position.z >= 10.0f ||
-                transform.position.z <= -10.0f ||
-                transform.position.x >= 6.0f ||
-                transform.position.x <= -6.0f)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
+    }
 
 
-        // Update is called once per frame
-        void Update()
-        {
-            DetermineMissileTarget();
-            DetermineDirection();
-            Move();
-            CheckArea();
-        }
+    //Update is called once per frame
+    void Update()
+    {
+        MoveBulletToDirection();
+        CheckArea();
+    }
 
+
+    public void MoveBulletToDirection()
+    {
+        DetermineMissileTarget();
+        DetermineDirection();
+        Move();
+    }
 
         /// <summary>
         /// Draw gizmos to target on the editor screen.
@@ -186,4 +189,4 @@ namespace MinimalShooting
         //    }
         //}
     }
-}
+

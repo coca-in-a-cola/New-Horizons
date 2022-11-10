@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MinimalShooting
-{
+
     /// <summary>
     /// Weapon
     /// This class implements a weapon system.
@@ -16,7 +15,7 @@ namespace MinimalShooting
 
         [Header("Interval between each fire")]
         [SerializeField]
-        float interval = 1.0f;
+        float interval = 1f;
 
         [Header("Bullet speed")]
         [SerializeField]
@@ -37,47 +36,67 @@ namespace MinimalShooting
         [SerializeField]
         bool isMissile = false;
 
+    InputHandler inputs;
 
-        private void OnEnable()
+    private void Awake()
+    {
+        inputs = new InputHandler();
+    }
+
+
+
+    private void OnEnable()
         {
-            StartCoroutine(FireLoop());
-        }
+            //StartCoroutine(FireLoop());
+        inputs.Enable();
+        inputs.Player.Shoot.started += ctx => StartCoroutine(FireLoop());
+        inputs.Player.Shoot.performed += ctx => StartCoroutine(FireLoop());
+        inputs.Player.Shoot.canceled += ctx => StartCoroutine(FireLoop());
 
+    }
 
-        IEnumerator FireLoop()
+    private void OnDisable()
+    {
+        inputs.Disable();
+        inputs.Player.Shoot.started -= ctx => StartCoroutine(FireLoop());
+        inputs.Player.Shoot.performed -= ctx => StartCoroutine(FireLoop());
+        inputs.Player.Shoot.canceled -= ctx => StartCoroutine(FireLoop());
+    }
+
+    IEnumerator FireLoop()
         {
             GameObject player = GameObject.Find("Player");
+        Debug.Log(inputs.Player.Shoot.activeControl.name);
+        while (inputs.Player.Shoot.IsPressed())
+        {
+            yield return new WaitForSeconds(this.interval);
 
-            while (true)
+            // Instantiate a bullet, position.
+            Bullet bullet = GameObject.Instantiate(this.prefabBullet);
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = transform.rotation;
+
+            // Set bullet properties.
+            bullet.SetDirection(transform.forward);
+            bullet.SetSpeed(this.speed);
+
+            // Calculate fire direction.
+            if (this.toPlayer)
             {
-                yield return new WaitForSeconds(this.interval);
-
-                // Instantiate a bullet, position.
-                Bullet bullet = GameObject.Instantiate(this.prefabBullet);
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
-
-                // Set bullet properties.
-                bullet.SetDirection(transform.forward);
-                bullet.SetSpeed(this.speed);
-
-                // Calculate fire direction.
-                if (this.toPlayer)
+                if (player != null)
                 {
-                    if (player != null)
-                    {
-                        this.direction = (player.transform.position - transform.position).normalized;
-                        bullet.transform.rotation = Quaternion.LookRotation(this.direction);
-                        bullet.SetDirection(this.direction);
-                    }
-                }
-
-                // Missile.
-                if (this.isMissile)
-                {
-                    bullet.SetFollowTarget();
+                    this.direction = (player.transform.position - transform.position).normalized;
+                    bullet.transform.rotation = Quaternion.LookRotation(this.direction);
+                    bullet.SetDirection(this.direction);
                 }
             }
+
+            // Missile.
+            if (this.isMissile)
+            {
+                bullet.SetFollowTarget();
+            }
+        }
         }
     }
-}
+

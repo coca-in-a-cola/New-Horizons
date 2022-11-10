@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MinimalShooting
-{
+
     /// <summary>
     /// Enemy
     /// This class implements an enemy.
@@ -110,7 +109,7 @@ namespace MinimalShooting
 
             // Calculate self-rotation speed.
             float speedRate = this.speed / this.speedMin;
-            GetComponentInChildren<Rotator>().SetSpeedOption(speedRate);
+            //GetComponentInChildren<Rotator>().SetSpeedOption(speedRate);
 
             // Determine direction if movementType is ToPlayer.
             if (this.movementType == MovementType.ToPlayer)
@@ -140,10 +139,10 @@ namespace MinimalShooting
             GameObject.Instantiate(this.prefabDamage, collisionPoint, Quaternion.identity);
 
             // Blink the object.
-            if (GetComponentInChildren<MaterialChanger>() != null)
-            {
-                GetComponentInChildren<MaterialChanger>().enabled = true;
-            }
+            //if (GetComponentInChildren<MaterialChanger>() != null)
+            //{
+            //    GetComponentInChildren<MaterialChanger>().enabled = true;
+            //}
 
             // Decrease current hp.
             --this.currentHp;
@@ -162,16 +161,16 @@ namespace MinimalShooting
             GameObject.Instantiate(this.prefabExplosion, transform.position, Quaternion.identity);
 
             // Set auto destroy property, if this has an trail object.
-            if (this.trailObject != null)
-            {
-                SelfDestroyed selfDestroy = this.trailObject.AddComponent<SelfDestroyed>();
-                // Disable coroutine to prevent destroy itself.
-                selfDestroy.enabled = false;
-                // Set delay.
-                selfDestroy.SetDelay(5.0f);
-                // Enable it.
-                selfDestroy.enabled = true;
-            }
+            //if (this.trailObject != null)
+            //{
+            //   // SelfDestroyed selfDestroy = this.trailObject.AddComponent<SelfDestroyed>();
+            //    // Disable coroutine to prevent destroy itself.
+            //    selfDestroy.enabled = false;
+            //    // Set delay.
+            //    selfDestroy.SetDelay(5.0f);
+            //    // Enable it.
+            //    selfDestroy.enabled = true;
+            //}
 
             // Destroy this enemey.
             Destroy(gameObject);
@@ -299,4 +298,4 @@ namespace MinimalShooting
             }
         }
     }
-}
+

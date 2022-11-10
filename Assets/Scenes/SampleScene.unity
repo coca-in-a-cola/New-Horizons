@@ -695,35 +695,61 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1696786380610706604, guid: eb1fc3de26490f44a8b019a28ab33e9c,
         type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696786380610706604, guid: eb1fc3de26490f44a8b019a28ab33e9c,
+        type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696786380610706604, guid: eb1fc3de26490f44a8b019a28ab33e9c,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1696786380610706604, guid: eb1fc3de26490f44a8b019a28ab33e9c,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 0.01
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1696786380610706604, guid: eb1fc3de26490f44a8b019a28ab33e9c,
         type: 3}
       propertyPath: m_Constraints
-      value: 0
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 1696786380610706604, guid: eb1fc3de26490f44a8b019a28ab33e9c,
         type: 3}
       propertyPath: m_Interpolate
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1696786380610706604, guid: eb1fc3de26490f44a8b019a28ab33e9c,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1696786380610706606, guid: eb1fc3de26490f44a8b019a28ab33e9c,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1696786380969768769, guid: eb1fc3de26490f44a8b019a28ab33e9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696786381554262196, guid: eb1fc3de26490f44a8b019a28ab33e9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696786381801957054, guid: eb1fc3de26490f44a8b019a28ab33e9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1696786380610706602, guid: eb1fc3de26490f44a8b019a28ab33e9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb1fc3de26490f44a8b019a28ab33e9c, type: 3}
 --- !u!1 &832575517
 GameObject:
@@ -792,8 +818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2973353939c48bf42bb11c2cf7762450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 25
-  rotationSpeed: 80
+  accelerationFactor: 30
+  turnFactor: 5
 --- !u!1001 &2084977407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -805,6 +831,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemySpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651097842453136149, guid: 5bae58c5f900c4e4b9a62ee2745db66b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5651097842453136151, guid: 5bae58c5f900c4e4b9a62ee2745db66b,
         type: 3}
