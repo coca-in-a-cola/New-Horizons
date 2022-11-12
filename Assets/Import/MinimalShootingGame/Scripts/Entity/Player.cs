@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MinimalShooting
-{
+
     public class Player : MonoBehaviour
     {
         [Header("Prefab explosion")]
@@ -20,7 +19,7 @@ namespace MinimalShooting
             gameObject.SetActive(false);
 
             // Call the GameOver method.
-            PlayManager.Instance.GameOver();
+            //PlayManager.Instance.GameOver();
         }
     }
-}
+

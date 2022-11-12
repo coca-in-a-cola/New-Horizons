@@ -5,41 +5,64 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     InputHandler inputs;
-
+ 
     [SerializeField]
-    private float moveSpeed;
-
+    private float accelerationFactor;
     [SerializeField]
-    private float rotationSpeed;
+    private float turnFactor;
+
+    float accelerationInput;
+    float steeringInput;
+
+    float rotationAngle;
+
+    Rigidbody rigidbody;
 
     private void Awake()
     {
         inputs = new InputHandler();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        SetInputVector();
+        ApplyEngineForce();
+        ApplySteering();
     }
 
     private void OnEnable()
     {
-        inputs.Player.Movement.Enable();
+        inputs.Enable();
 
     }
 
     private void OnDisable()
     {
-        inputs.Player.Movement.Disable();
-
+        inputs.Disable();
     }
 
-    private void Move()
+    void ApplyEngineForce()
+    {
+        if (accelerationInput == 0)
+            rigidbody.drag = Mathf.Lerp(rigidbody.drag, 2f, Time.fixedDeltaTime * 2f);
+        else
+            rigidbody.drag = 0;
+
+        Vector3 engineForceVector = transform.forward * accelerationInput * accelerationFactor;
+        rigidbody.AddForce(engineForceVector, ForceMode.Force);
+    }
+
+    void ApplySteering()
+    {
+        rotationAngle -= steeringInput * turnFactor;
+        rigidbody.MoveRotation(Quaternion.Euler(0, -rotationAngle, 0));
+    }
+
+    void SetInputVector()
     {
         Vector2 dir = inputs.Player.Movement.ReadValue<Vector2>();
-        transform.Translate(new Vector3(0, 0, dir.y) * moveSpeed * Time.deltaTime, Space.Self);
-        transform.Rotate(0, dir.x * rotationSpeed * Time.deltaTime, 0, Space.Self);
+        steeringInput = dir.x;
+        accelerationInput = dir.y;
     }
-
-    
 }
