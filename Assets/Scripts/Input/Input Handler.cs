@@ -48,7 +48,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""wasd"",
+                    ""name"": ""PC1"",
                     ""id"": ""69008805-163e-4549-b937-36a01dc83bc0"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
