@@ -39,7 +39,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""wasd"",
+                    ""name"": ""PC1"",
                     ""id"": ""69008805-163e-4549-b937-36a01dc83bc0"",
                     ""path"": ""2DVector"",
                     ""interactions"": ""Hold"",
@@ -52,7 +52,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""fc748eb0-2f12-4a98-943a-72de1a0cfd99"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and mouse"",
@@ -63,7 +63,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""0ea4a69e-d89f-4b23-be9e-c7bcb02b780c"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and mouse"",
@@ -74,7 +74,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""87679971-247e-4ff0-8ba0-a87a8fce1e38"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and mouse"",
@@ -85,7 +85,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""13ff6d09-6c72-475c-b44a-6fe2ebaf9689"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and mouse"",
