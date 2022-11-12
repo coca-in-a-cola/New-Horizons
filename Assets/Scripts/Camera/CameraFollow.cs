@@ -9,6 +9,8 @@ public class CameraFollow : MonoBehaviour
 	public bool isCustomOffset;
 	public Vector3 offset;
 
+	public bool enableLookAt = false;
+
 	public float smoothSpeed = 0.1f;
 	public float lookAtSpeed = 10f;
 
@@ -21,18 +23,29 @@ public class CameraFollow : MonoBehaviour
 		}
 	}
 
+	void OldFollow()
+    {
+		Vector3 targetPos = target.transform.position + offset;
+		Vector3 smoothFollow = Vector3.Lerp(transform.position, targetPos, smoothSpeed);
+
+		transform.position = smoothFollow;
+	}
+
+	void Follow()
+    {
+		transform.position = target.transform.position + offset;
+	}
+
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		if (target)
 		{
-			transform.LookAt(target.transform.position, Vector3.forward);
-			Vector3 targetPos = target.transform.position + offset;
-			Vector3 smoothFollow = Vector3.Lerp(transform.position, targetPos, smoothSpeed);
+			if (enableLookAt)
+				transform.LookAt(target.transform.position, Vector3.forward);
 
-			transform.position = smoothFollow;
-
+			Follow();
 		}
 	}
 }

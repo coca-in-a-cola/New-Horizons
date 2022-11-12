@@ -19,7 +19,6 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(inputs.Player.Movement.ReadValue<Vector2>());
         Move();
     }
 
