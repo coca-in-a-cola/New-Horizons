@@ -37,9 +37,18 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""ShootBullet"",
                     ""type"": ""Button"",
                     ""id"": ""85c2766f-b5e2-4221-a555-6e630b8c137a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootMissile"",
+                    ""type"": ""Button"",
+                    ""id"": ""391f2a75-9320-499e-bf3d-d2237a1616c2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -109,18 +118,18 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and mouse"",
-                    ""action"": ""Shoot"",
+                    ""action"": ""ShootBullet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""db83d34f-0546-4193-9cee-c31b3b7cb624"",
+                    ""id"": ""dc54f0eb-3f21-4ec0-bc62-36a758484f12"",
                     ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard and mouse"",
-                    ""action"": ""Shoot"",
+                    ""groups"": """",
+                    ""action"": ""ShootMissile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -144,7 +153,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_ShootBullet = m_Player.FindAction("ShootBullet", throwIfNotFound: true);
+        m_Player_ShootMissile = m_Player.FindAction("ShootMissile", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,13 +215,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_ShootBullet;
+    private readonly InputAction m_Player_ShootMissile;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
         public PlayerActions(@InputHandler wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @ShootBullet => m_Wrapper.m_Player_ShootBullet;
+        public InputAction @ShootMissile => m_Wrapper.m_Player_ShootMissile;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -224,9 +236,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @ShootBullet.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootBullet;
+                @ShootBullet.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootBullet;
+                @ShootBullet.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootBullet;
+                @ShootMissile.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootMissile;
+                @ShootMissile.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootMissile;
+                @ShootMissile.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShootMissile;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -234,9 +249,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
+                @ShootBullet.started += instance.OnShootBullet;
+                @ShootBullet.performed += instance.OnShootBullet;
+                @ShootBullet.canceled += instance.OnShootBullet;
+                @ShootMissile.started += instance.OnShootMissile;
+                @ShootMissile.performed += instance.OnShootMissile;
+                @ShootMissile.canceled += instance.OnShootMissile;
             }
         }
     }
@@ -253,6 +271,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
+        void OnShootBullet(InputAction.CallbackContext context);
+        void OnShootMissile(InputAction.CallbackContext context);
     }
 }

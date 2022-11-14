@@ -24,7 +24,7 @@ namespace MinimalShooting
 
         void OnDamage(Vector3 collisionPoint)
         {
-            GetComponentInParent<Enemy>().OnDamage(collisionPoint);
+            //GetComponentInParent<Enemy>().OnDamage(collisionPoint);
         }
     }
 }

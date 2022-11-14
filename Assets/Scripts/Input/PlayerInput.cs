@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
     float accelerationInput;
     float steeringInput;
 
-    float rotationAngle;
+    public float rotationAngle;
 
     Rigidbody rigidbody;
 
@@ -34,7 +34,6 @@ public class PlayerInput : MonoBehaviour
     private void OnEnable()
     {
         inputs.Enable();
-
     }
 
     private void OnDisable()

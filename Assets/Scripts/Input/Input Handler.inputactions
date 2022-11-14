@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
+                    "name": "ShootBullet",
                     "type": "Button",
                     "id": "85c2766f-b5e2-4221-a555-6e630b8c137a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShootMissile",
+                    "type": "Button",
+                    "id": "391f2a75-9320-499e-bf3d-d2237a1616c2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -87,18 +96,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and mouse",
-                    "action": "Shoot",
+                    "action": "ShootBullet",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "db83d34f-0546-4193-9cee-c31b3b7cb624",
+                    "id": "dc54f0eb-3f21-4ec0-bc62-36a758484f12",
                     "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and mouse",
-                    "action": "Shoot",
+                    "groups": "",
+                    "action": "ShootMissile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
