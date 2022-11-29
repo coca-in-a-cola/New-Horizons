@@ -435,6 +435,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d9436c866c94144bead2df5bca1bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletsPrefab:
+  - {fileID: 4016322583427669576, guid: 2d461a501962b5d4b9d214428ce5d8e6, type: 3}
+  - {fileID: 4016322583427669576, guid: 52fb6e34653921e449c3db23feafd8eb, type: 3}
   delay: 0.25
 --- !u!114 &213323287
 MonoBehaviour:
@@ -451,9 +454,6 @@ MonoBehaviour:
   barrels:
   - {fileID: 1733353154}
   - {fileID: 1544556506}
-  bulletsPrefab:
-  - {fileID: 4016322583427669576, guid: 2d461a501962b5d4b9d214428ce5d8e6, type: 3}
-  - {fileID: 4016322583427669576, guid: 52fb6e34653921e449c3db23feafd8eb, type: 3}
   bulletPoolCount: 10
 --- !u!1 &258256842
 GameObject:
@@ -3774,12 +3774,12 @@ Rigidbody:
   m_GameObject: {fileID: 1696786380170242320}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.01
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 84
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!114 &1696786380170242327
 MonoBehaviour:
@@ -3806,7 +3806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1696786380170242327}
-  accelerationFactor: 10
+  accelerationFactor: 30
   turnFactor: 10
 --- !u!23 &1711813855649628312
 MeshRenderer:

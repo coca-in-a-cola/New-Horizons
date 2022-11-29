@@ -26,33 +26,15 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        //CheckArea();
+        CheckArea();
     }
 
-    //void CheckArea()
-    //{
-    //    Vector3 point = Camera.main.WorldToViewportPoint(transform.position);
-    //    if (point.y < 0f || point.y > 1f || point.x > 1f || point.x < 0f)
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
-    //private void DisableObject()
-    //{
-    //    rb2d.velocity = Vector2.zero;
-    //    gameObject.SetActive(false);
-    //}
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    OnHit?.Invoke();
-    //    var damagable = collision.GetComponent<Damagable>();
-    //    if (damagable != null)
-    //    {
-    //        damagable.Hit(bulletData.damage);
-    //    }
-
-    //    DisableObject();
-    //}
+    void CheckArea()
+    {
+        Vector3 point = Camera.main.WorldToViewportPoint(transform.position);
+        if (point.y < 0.1f || point.y > 0.9f || point.x > 0.9f || point.x < 0.1f)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }

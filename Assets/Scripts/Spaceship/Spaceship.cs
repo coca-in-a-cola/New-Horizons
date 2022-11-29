@@ -29,11 +29,6 @@ public class Spaceship : MonoBehaviour
 
     void ApplyEngineForce()
     {
-        //if (controller.AccelerationInput == 0)
-        //    rigidbody.drag = Mathf.Lerp(rigidbody.drag, 7f, Time.fixedDeltaTime * 7f);
-        //else
-        //    rigidbody.drag = Mathf.Lerp(rigidbody.drag, 0f, Time.fixedDeltaTime * 2f);
-
         Vector3 engineForceVector = transform.forward * controller.AccelerationInput * accelerationFactor;
         rigidbody.AddForce(engineForceVector, ForceMode.Force);
     }
