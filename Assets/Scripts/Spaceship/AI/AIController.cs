@@ -4,26 +4,46 @@ using UnityEngine;
 
 public class AIController : SpaceshipController
 {
-    float accelerationInput;
-    float steeringInput;
-
-    
-    [SerializeField]
-    public Transform Target;
-    public float angleTurnThreshold = 0.05f;
-    public float angleGoThreshold = 20f;
-
+    /******************
+     * HELPER CLASSES *
+     ******************/
     [System.Serializable]
     class DebugConfig
     {
-        public bool enableDebug;
+        public bool drawGizmos;
         public float directionVectorLength = 2;
     }
 
+    class AIBehavior
+    {
+
+    }
+     
+
+    /***********************
+     * INSPECTOR VARIABLES *  
+     ***********************/
     [SerializeField]
     private DebugConfig debugConfig;
 
+    [SerializeField]
+    private Transform InitialTarget;
 
+    [SerializeField]
+    private float angleGoThreshold = 20f;
+
+
+    /******************
+     * PRIVATE FIELDS *
+     ******************/
+    private Transform target;
+    private float accelerationInput;
+    private float steeringInput;
+
+
+    /**************
+     * PROPERTIES *
+     **************/
     public override float AccelerationInput
     {
         get => accelerationInput;
@@ -34,6 +54,9 @@ public class AIController : SpaceshipController
         get => steeringInput;
     }
 
+    /*******************
+     * UNITY GAME LOOP *
+     *******************/
     private void FixedUpdate()
     {
         Vector3 dir = getDirectionToTarget();
@@ -41,35 +64,41 @@ public class AIController : SpaceshipController
         float angle = Vector3.SignedAngle(transform.forward, dir, Vector3.up);
 
         TurnToTarget(dir, angle);
-        GoToTarget(dir, angle);
+        ThrustToTerget(dir, angle);
+    }
+
+    void GoToTarget(Vector3 dir, float angle) { 
+        TurnToTarget(dir, angle);
+        ThrustToTerget(dir, angle);
     }
 
     void TurnToTarget(Vector3 dir, float angle)
     {
+        float sign = angle > 0 ? 1.0f : -1.0f;
+        float value = Mathf.Clamp01(angle * angle * Time.deltaTime);
 
-        steeringInput = Mathf.Abs(angle) < angleTurnThreshold ? 0.0f
-            : angle > 0 ? 1.0f : -1.0f;
+        steeringInput =  sign *value;
     }
 
-    void GoToTarget(Vector3 dir, float angle)
+    void ThrustToTerget(Vector3 dir, float angle)
     {
         accelerationInput = Mathf.Abs(angle) > angleGoThreshold ? 0.0f
             : 1.0f;
     }
 
     private Vector3 getDirectionToTarget() 
-        => Vector3.Normalize(Target.position - transform.position);
+        => Vector3.Normalize(InitialTarget.position - transform.position);
 
     
     void OnDrawGizmos()
     {
-        if (!debugConfig.enableDebug)
+        if (!debugConfig.drawGizmos)
             return;
 
-        if (Target)
+        if (InitialTarget)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(Target.position, 3f);
+            Gizmos.DrawWireSphere(InitialTarget.position, 3f);
 
             Gizmos.color = Color.red;
             Vector3 dir = getDirectionToTarget();

@@ -43,6 +43,7 @@ public class PlayerController : SpaceshipController
     {
         Vector2 dir = inputs.Player.Movement.ReadValue<Vector2>();
         steeringInput = dir.x;
+        Debug.Log(steeringInput);
         accelerationInput = dir.y;
     }
 }

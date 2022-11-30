@@ -2,23 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Spaceship : MonoBehaviour
 {
     [SerializeField]
     public SpaceshipController controller;
 
-    [SerializeField]
-    private float accelerationFactor;
-    [SerializeField]
-    private float turnFactor;
+    [SerializeField, Range(0f, 1f)]
+    private float controllerInputEpsilon = 0.1f;
 
-    float rotationAngle;
 
-    Rigidbody rigidbody;
+    /// <summary>
+    /// Movement settings for spaceship
+    /// </summary>
+    [System.Serializable]
+    class Movement
+    {
+        /// <summary>
+        /// Movement speed settings
+        /// </summary>
+        [System.Serializable]
+        public class Speed
+        {
+            [Range(0f, 5000f)]
+            public float thrust = 2000f;
+
+            [Range(0f, 3000f)]
+            public float turn = 1000f;
+        }
+
+        [SerializeField]
+        public Speed speed;
+
+        [SerializeField, Range(0f, 1f)]
+        public float thrustReduction = 0.95f;
+    }
+
+    [SerializeField]
+    private Movement movement;
+
+    Rigidbody rb;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -29,18 +56,22 @@ public class Spaceship : MonoBehaviour
 
     void ApplyEngineForce()
     {
-        //if (controller.AccelerationInput == 0)
-        //    rigidbody.drag = Mathf.Lerp(rigidbody.drag, 7f, Time.fixedDeltaTime * 7f);
-        //else
-        //    rigidbody.drag = Mathf.Lerp(rigidbody.drag, 0f, Time.fixedDeltaTime * 2f);
-
-        Vector3 engineForceVector = transform.forward * controller.AccelerationInput * accelerationFactor;
-        rigidbody.AddForce(engineForceVector, ForceMode.Force);
+        if (Mathf.Abs(controller.AccelerationInput) > controllerInputEpsilon)
+        {
+            // We have input
+            Vector3 engineForceVector = Vector3.forward  * movement.speed.thrust 
+                * controller.AccelerationInput * Time.deltaTime;
+            rb.AddRelativeForce(engineForceVector);
+        }
     }
 
     void ApplySteering()
     {
-        rotationAngle -= controller.SteeringInput * turnFactor;
-        rigidbody.MoveRotation(Quaternion.Euler(0, -rotationAngle, 0));
+        if (Mathf.Abs(controller.SteeringInput) > controllerInputEpsilon)
+        {
+            Vector3 engineTorqueVector = Vector3.up * controller.SteeringInput 
+                * movement.speed.turn * Time.deltaTime;
+            rb.AddRelativeTorque(engineTorqueVector);
+        }
     }
 }
