@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    //[SerializeField]
-    //protected GameObject objectToPool;
     [SerializeField]
     protected int poolSize = 10;
-
-    private Queue<GameObject> objectPool;
 
     public Transform spawnedObjectsParent;
 
@@ -17,17 +13,15 @@ public class ObjectPool : MonoBehaviour
 
     private void Awake()
     {
-        objectPool = new Queue<GameObject>();
+        
     }
 
-    public void Initialize(int poolSize = 10)
+    public void Initialize(int poolSize)
     {
         this.poolSize = poolSize;
-        
-       
     }
 
-    public GameObject CreateObject(GameObject objectToPool)
+    public GameObject CreateObject(GameObject objectToPool, Queue<GameObject> objectPool)
     {
 
         CreateObjectParentIfNeeded(objectToPool);
@@ -40,7 +34,6 @@ public class ObjectPool : MonoBehaviour
             spawnedObject = Instantiate(objectToPool, transform.position, Quaternion.identity);
             spawnedObject.name = transform.root.name + "_" + objectToPool.name + "_" + objectPool.Count;
             spawnedObject.transform.SetParent(spawnedObjectsParent);
-            //spawnedObject.AddComponent<DestroyIfDisabled>();
         }
         else
         {
@@ -69,17 +62,4 @@ public class ObjectPool : MonoBehaviour
 
         }
     }
-
-    //private void OnDestroy()
-    //{
-    //    foreach (var item in objectPool)
-    //    {
-    //        if (item == null)
-    //            continue;
-    //        else if (item.activeSelf == false || alwaysDestroy)
-    //            Destroy(item);
-    //        else
-    //            item.GetComponent<DestroyIfDisabled>().SelfDestructionEnabled = true;
-    //    }
-    //}
 }
