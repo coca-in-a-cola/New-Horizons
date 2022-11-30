@@ -7,5 +7,7 @@ public interface ISpaceshipController
     float AccelerationInput { get; }
     float SteeringInput { get; }
 
-    bool ShootInput { get; }
+    bool ShootingInput { get; }
+
+    bool ShootingInputAlt { get; }
 }

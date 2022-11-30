@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    InputHandler inputs;
+    [SerializeField]
+    public SpaceshipController controller;
+
     Weapons weapons;
     public List<GameObject> bulletsPrefab;
     Queue<GameObject> bulletQueue;
     Queue<GameObject> missileQueue;
-    float coolDown = 0;
+    float coolDown = 0f;
+    float coolDownAlt = 0f;
     public float delay = 0.25f;
 
     private void Awake()
     {
-        inputs = new InputHandler();
         weapons = GetComponent<Weapons>();
         bulletQueue = new Queue<GameObject>();
         missileQueue = new Queue<GameObject>();
@@ -23,26 +25,27 @@ public class Shooting : MonoBehaviour
     private void Update()
     {
         coolDown -= Time.deltaTime;
-        if(inputs.Player.ShootBullet.inProgress && coolDown <= 0)
+        coolDownAlt -= Time.deltaTime;
+        if (controller.ShootingInput && coolDown <= 0)
         {
             coolDown = delay;
             weapons.Shoot(bulletsPrefab[0], bulletQueue);
         }
         
-        if (inputs.Player.ShootMissile.inProgress && coolDown <= 0)
+        if (controller.ShootingInputAlt && coolDownAlt <= 0)
         {
-            coolDown = delay;
+            coolDownAlt = delay;
             weapons.Shoot(bulletsPrefab[1], missileQueue);
         }
     }
 
     private void OnEnable()
     {
-        inputs.Enable();
+        // inputs.Enable();
     }
 
     private void OnDisable()
     {
-        inputs.Disable();
+        // inputs.Disable();
     }
 }

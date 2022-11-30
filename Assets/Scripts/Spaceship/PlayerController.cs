@@ -9,6 +9,9 @@ public class PlayerController : SpaceshipController
     float accelerationInput;
     float steeringInput;
 
+    bool shootingInput;
+    bool shootingInputAlt;
+
     public override float AccelerationInput
     {
         get => accelerationInput;
@@ -19,6 +22,15 @@ public class PlayerController : SpaceshipController
         get => steeringInput;
     }
 
+    public override bool ShootingInput
+    {
+        get => shootingInput;
+    }
+    public override bool ShootingInputAlt
+    {
+        get => shootingInputAlt;
+    }
+
     private void Awake()
     {
         inputs = new InputHandler();
@@ -27,6 +39,7 @@ public class PlayerController : SpaceshipController
     private void FixedUpdate()
     {
         SetInputVector();
+        SetShooting();
     }
 
     private void OnEnable()
@@ -43,7 +56,12 @@ public class PlayerController : SpaceshipController
     {
         Vector2 dir = inputs.Player.Movement.ReadValue<Vector2>();
         steeringInput = dir.x;
-        Debug.Log(steeringInput);
         accelerationInput = dir.y;
+    }
+
+    void SetShooting()
+    {
+        shootingInput = inputs.Player.ShootBullet.inProgress;
+        shootingInputAlt = inputs.Player.ShootMissile.inProgress;
     }
 }

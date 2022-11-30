@@ -92,7 +92,7 @@
                 {
                     "name": "",
                     "id": "09065fd5-fe27-4f80-835a-439f3510bf6f",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and mouse",
@@ -103,7 +103,7 @@
                 {
                     "name": "",
                     "id": "dc54f0eb-3f21-4ec0-bc62-36a758484f12",
-                    "path": "<Keyboard>/leftCtrl",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

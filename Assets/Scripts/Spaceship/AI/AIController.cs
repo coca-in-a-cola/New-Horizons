@@ -21,7 +21,7 @@ public class AIController : SpaceshipController
      
 
     /***********************
-     * INSPECTOR VARIABLES *  
+     * INSPECTOR VARIABLES *
      ***********************/
     [SerializeField]
     private DebugConfig debugConfig;
@@ -39,6 +39,7 @@ public class AIController : SpaceshipController
     private Transform target;
     private float accelerationInput;
     private float steeringInput;
+    private bool shootingInput;
 
 
     /**************
@@ -54,6 +55,11 @@ public class AIController : SpaceshipController
         get => steeringInput;
     }
 
+    public override bool ShootingInput
+    {
+        get => shootingInput;
+    }
+
     /*******************
      * UNITY GAME LOOP *
      *******************/
@@ -65,11 +71,11 @@ public class AIController : SpaceshipController
 
         TurnToTarget(dir, angle);
         ThrustToTerget(dir, angle);
+        ShootTarget(dir, angle);
     }
 
-    void GoToTarget(Vector3 dir, float angle) { 
-        TurnToTarget(dir, angle);
-        ThrustToTerget(dir, angle);
+    void ShootTarget(Vector3 dir, float angle) {
+        shootingInput = Mathf.Abs(angle) < angleGoThreshold;
     }
 
     void TurnToTarget(Vector3 dir, float angle)
