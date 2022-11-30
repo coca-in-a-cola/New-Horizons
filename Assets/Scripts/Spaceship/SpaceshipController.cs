@@ -12,4 +12,9 @@ public abstract class SpaceshipController : MonoBehaviour, ISpaceshipController
     {
         get => 0.0f;
     }
+    
+    public virtual bool ShootInput
+    {
+        get => false;
+    }
 }
