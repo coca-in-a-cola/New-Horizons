@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 70
+  sound: {fileID: 8300000, guid: 183b723c2de53f249b2a0fceba550675, type: 3}
 --- !u!54 &3217784964648147336
 Rigidbody:
   m_ObjectHideFlags: 0

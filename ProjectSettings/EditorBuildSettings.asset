@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleSceneCocaInACola.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Main Menu Scene.unity
+    guid: 7538a6af65978a0469e774eecb6144c9
+  - enabled: 1
+    path: Assets/Scenes/Star System.unity
+    guid: 27bc95bc6a6b18f41af43c52d94128b8
   m_configObjects: {}
