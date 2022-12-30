@@ -6,6 +6,7 @@ public class Shooting : MonoBehaviour
 {
     [SerializeField]
     public SpaceshipController controller;
+    public AudioSource shootingAudio;
 
     Weapons weapons;
     public List<GameObject> bulletsPrefab;
@@ -30,12 +31,14 @@ public class Shooting : MonoBehaviour
         {
             coolDown = delay;
             weapons.Shoot(bulletsPrefab[0], bulletQueue);
+            bulletsPrefab[0].GetComponent<Bullet>().PlaySound(shootingAudio);
         }
         
         if (controller.ShootingInputAlt && coolDownAlt <= 0)
         {
             coolDownAlt = delay;
             weapons.Shoot(bulletsPrefab[1], missileQueue);
+            bulletsPrefab[1].GetComponent<Bullet>().PlaySound(shootingAudio);
         }
     }
 

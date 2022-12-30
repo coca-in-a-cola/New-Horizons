@@ -9,8 +9,12 @@ public class Bullet : MonoBehaviour
     private float conquaredDistance = 0;
     private Rigidbody rb;
 
+
     [SerializeField]
     private float speed = 100;
+
+    [SerializeField]
+    private AudioClip sound;
 
     private void Awake()
     {
@@ -27,6 +31,11 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         CheckArea();
+    }
+
+    public void PlaySound(AudioSource source)
+    {
+        source.PlayOneShot(sound);
     }
 
     void CheckArea()
